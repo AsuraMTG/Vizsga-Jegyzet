@@ -38,8 +38,8 @@ echo     'INSERT INTO tabla_nev (value1, value2) VALUES ( ?, ?)', >> index.js
 echo     [value1, value2], >> index.js
 echo     (err, result) =^> ^{ >> index.js
 echo       if (err) { >> index.js
-echo        console.error('Hiba a beszúrásnál:', err); >> index.js
-echo        return res.status(500).json({ message: 'Hiba történt a beszúrás során.' }); >> index.js
+echo        console.error('Create error:', err); >> index.js
+echo        return res.status(500).json({ message: 'Create error.' }); >> index.js
 echo      } >> index.js
 echo      res.json({ value1, value2}); >> index.js
 echo    } >> index.js
@@ -50,8 +50,8 @@ echo // Read / Get >> index.js
 echo app.get('/', (req, res) =^> ^{ >> index.js
 echo  db.query('SELECT * FROM tabla_nev', (err, results) =^> ^{ >> index.js
 echo    if (err) { >> index.js
-echo      console.error('Hiba a lekérdezésnél:', err); >> index.js
-echo      return res.status(500).json({ message: 'Hiba történt az adatbázis lekérdezése során.' }); >> index.js
+echo      console.error('Read error:', err); >> index.js
+echo      return res.status(500).json({ message: 'Read error.' }); >> index.js
 echo    } >> index.js
 echo    res.json(results); >> index.js
 echo  }); >> index.js
@@ -65,8 +65,8 @@ echo    'UPDATE tabla_nev SET value1 = ?, value2 = ? WHERE id = ?', >> index.js
 echo    [value1, value2, req.params.id], >> index.js
 echo    (err, result) =^> ^{ >> index.js
 echo      if (err) { >> index.js
-echo        console.error('Hiba a frissítésnél:', err); >> index.js
-echo        return res.status(500).json({ message: 'Frissítés nem sikerült.' }); >> index.js
+echo        console.error('Update error:', err); >> index.js
+echo        return res.status(500).json({ message: 'Update error.' }); >> index.js
 echo      } >> index.js
 echo      res.sendStatus(204); >> index.js
 echo    } >> index.js
@@ -77,8 +77,8 @@ echo // Delete >> index.js
 echo app.delete('/:id', (req, res) =^> ^{ >> index.js
 echo  db.query('DELETE FROM tabla_nev WHERE id = ?', [req.params.id], (err, result) =^> ^{ >> index.js
 echo    if (err) { >> index.js
-echo      console.error('Hiba a törlésnél:', err); >> index.js
-echo      return res.status(500).json({ message: 'Törlés nem sikerült.' }); >> index.js
+echo      console.error('Delete error:', err); >> index.js
+echo      return res.status(500).json({ message: 'Delete error.' }); >> index.js
 echo    } >> index.js
 echo    res.sendStatus(204); >> index.js
 echo  }); >> index.js
