@@ -1,6 +1,4 @@
 # Vizsga-Jegyzet
-2025 Szakmai Vizsga Jegyzetek
-
 
 **Ami várhatóan közös minden feladatban:**
 
