@@ -243,3 +243,5 @@ export default function App() {
   )
 }
 ```
+> [!WARNING]  
+> A `App.css` illetve az `index.css` tartalmat torolni kell a Bootstrap miatt.
