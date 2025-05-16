@@ -24,50 +24,64 @@ echo const db = mysql.createConnection(^{ >> index.js
 echo     host: 'localhost', >> index.js
 echo     user: 'root', >> index.js
 echo     password: '', >> index.js
-echo     database: '', >> index.js
-echo     port: 3306 >> index.js
+echo     database: 'adatbazis_nev', >> index.js
+echo     port: 3306 // esetenkent 3307 >> index.js
 echo }); >> index.js
 echo. >> index.js
 echo // vegpontok >> index.js
 echo. >> index.js
 echo // Create / Post >> index.js
-echo app.post('/', async (req, res) =^> ^{  >> index.js
-echo   const { ertek1, ertek2, ertek3} = req.body; >> index.js
-echo   const [result] = await pool.query( >> index.js
-echo     'INSERT INTO database (database_ertek1, database_ertek2, database_ertek3) VALUES (?, ?, ?)', >> index.js
-echo     [ertek1, ertek2, ertek3] >> index.js
-echo   ); >> index.js
-echo   res.json({ >> index.js
-echo     ertek1, >> index.js
-echo     ertek2, >> index.js
-echo     ertek3 >> index.js
-echo    }); >> index.js
+echo app.post('/', (req, res) =^> ^{  >> index.js
+echo   const { value1, value2} = req.body; >> index.js
+echo   db.query( >> index.js
+echo     'INSERT INTO tabla_nev (value1, value2) VALUES ( ?, ?)', >> index.js
+echo     [value1, value2], >> index.js
+echo     (err, result) =^> ^{ >> index.js
+echo       if (err) { >> index.js
+echo        console.error('Hiba a beszúrásnál:', err); >> index.js
+echo        return res.status(500).json({ message: 'Hiba történt a beszúrás során.' }); >> index.js
+echo      } >> index.js
+echo      res.json({ value1, value2}); >> index.js
+echo    } >> index.js
+echo  ); >> index.js
 echo }); >> index.js
 echo. >> index.js
 echo // Read / Get >> index.js
-echo app.get('/', async (req, res) =^> ^{  >> index.js
-echo   try { >> index.js
-echo     const [rows] = await pool.query(`SELECT * FROM database`); >> index.js
-echo     res.json(rows); >> index.js
-echo   } catch (err) { >> index.js
-echo     res.status(500).json({ message: 'Fetching from database failed.' }); >> index.js
-echo   } >> index.js
+echo app.get('/', (req, res) =^> ^{ >> index.js
+echo  db.query('SELECT * FROM tabla_nev', (err, results) =^> ^{ >> index.js
+echo    if (err) { >> index.js
+echo      console.error('Hiba a lekérdezésnél:', err); >> index.js
+echo      return res.status(500).json({ message: 'Hiba történt az adatbázis lekérdezése során.' }); >> index.js
+echo    } >> index.js
+echo    res.json(results); >> index.js
+echo  }); >> index.js
 echo }); >> index.js
 echo. >> index.js
 echo // Update / Put >> index.js
-echo app.put('/:id', async (req, res) =^> ^{ >> index.js
-echo   const { ertek1, ertek2, ertek3} = req.body; >> index.js
-echo   await pool.query( >> index.js
-echo     'UPDATE database SET database_ertek1 = ?, database_ertek2 = ?, database_ertek3 = ? WHERE id = ?', >> index.js
-echo     [ertek1, ertek2, ertek3, req.params.id] >> index.js
-echo   ); >> index.js
-echo   res.sendStatus(204); >> index.js
+echo app.put('/:id', (req, res) =^> ^{ >> index.js
+echo  const { value1, value2} = req.body; >> index.js
+echo  db.query( >> index.js
+echo    'UPDATE tabla_nev SET value1 = ?, value2 = ? WHERE id = ?', >> index.js
+echo    [value1, value2, req.params.id], >> index.js
+echo    (err, result) =^> ^{ >> index.js
+echo      if (err) { >> index.js
+echo        console.error('Hiba a frissítésnél:', err); >> index.js
+echo        return res.status(500).json({ message: 'Frissítés nem sikerült.' }); >> index.js
+echo      } >> index.js
+echo      res.sendStatus(204); >> index.js
+echo    } >> index.js
+echo  ); >> index.js
 echo }); >> index.js
 echo. >> index.js
 echo // Delete >> index.js
-echo app.delete('/:id', async (req, res) =^> ^{ >> index.js
-echo   await pool.query('DELETE FROM database WHERE id = ?', [req.params.id]); >> index.js
-echo   res.sendStatus(204); >> index.js
+echo app.delete('/:id', (req, res) =^> ^{ >> index.js
+echo  db.query('DELETE FROM tabla_nev WHERE id = ?', [req.params.id], (err, result) =^> ^{ >> index.js
+echo    if (err) { >> index.js
+echo      console.error('Hiba a törlésnél:', err); >> index.js
+echo      return res.status(500).json({ message: 'Törlés nem sikerült.' }); >> index.js
+echo    } >> index.js
+echo    res.sendStatus(204); >> index.js
+echo  }); >> index.js
 echo }); >> index.js
 echo. >> index.js
 echo app.listen(3000, () =^> ^{ >> index.js
