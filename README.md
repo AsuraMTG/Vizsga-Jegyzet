@@ -3,6 +3,11 @@
 
 
 **Ami várhatóan közös minden feladatban:**
+
+> [!WARNING]  
+> Az `index.js`-ben állítsd be a db portot `port: 3307` ha kell
+
+
 ```bash
 mkdir vizsga
 cd vizsga
