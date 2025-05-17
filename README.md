@@ -105,9 +105,10 @@ exit
 
 > [!WARNING]  
 > Mindkét `package.json`-ban állítsd be `"type": "module"` 
+----
 
-
-`src/main.jsx`
+> [!WARNING]
+> `src/main.jsx` Ha bootstrap nelkul hasznalod
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -122,7 +123,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>,
 )
 ```
-
+> [!WARNING]
+> `src/App.jsx` Ha bootstrap nelkul hasznalod
 `src/App.jsx`
 ```jsx
 import React from 'react'
@@ -145,8 +147,8 @@ export default function App() {
   )
 }
 ```
-
-`src/pages/Home.jsx`
+> [!TIP]
+> `src/pages/Home.jsx`
 ```jsx
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -175,8 +177,8 @@ export default function Home() {
   )
 }
 ```
-
-`src/pages/About.jsx`
+> [!TIP]
+> `src/pages/About.jsx`
 ```jsx
 import React from 'react'
 
@@ -189,8 +191,8 @@ export default function About() {
   )
 }
 ```
-
-`App.jsx` a menü Bootstrap-el
+> [!TIP]
+> `App.jsx` a menü Bootstrap-el
 ```jsx
 import { BrowserRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
