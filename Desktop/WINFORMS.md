@@ -12,7 +12,7 @@
      this.kor = kor;
  }
 ```
-
+`program.cs`
 ```csharp
 public Form1()
 {
