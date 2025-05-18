@@ -1,3 +1,18 @@
+
+`ember.cs` Class
+```csharp
+ public int id { get; set; }
+ public string nev { get; set; }
+ public int kor { get; set; }
+
+ public Ember(int id, string nev, int kor)
+ {
+     this.id = id;
+     this.nev = nev;
+     this.kor = kor;
+ }
+```
+
 ```csharp
 using System.IO;
 
