@@ -22,13 +22,13 @@
 ```
 
 ```csharp
-  List<Ember> emberek = new List<Ember>();
+    List<Ember> emberek = new List<Ember>();
+    
+    Ember egyEmber = new Ember(1, Andris, 22, DateTime.Parse("2000.02.11"));
+    emberek.Add(egyEmber);
 
-  Ember egyEmber = new Ember(1, Andris, 22, DateTime.Parse("2000.02.11"));
-  emberek.Add(egyEmber);
-
-  for (int i = 0; i < emberek.Count; i++)
-  {
-      Console.Write(emberek[i].ToString()); // --> id: 1, nev: Andris, kor: 22, szuletett: 2000. 02. 11. 0:00:00
-  }
+    for (int i = 0; i < emberek.Count; i++)
+    {
+        Console.Write(emberek[i].ToString()); // --> id: 1, nev: Andris, kor: 22, szuletett: 2000. 02. 11. 0:00:00
+    }
 ```
