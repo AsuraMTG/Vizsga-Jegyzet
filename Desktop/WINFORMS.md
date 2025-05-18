@@ -111,3 +111,68 @@ private void button_Delete_Click(object sender, EventArgs e)
     listBox1.Items.Remove(listBox1.SelectedItem);
 }
 ```
+
+export to `bin/Debug`
+```csharp
+private void button_export_Click(object sender, EventArgs e)
+{
+    string fileName = "exportalt_adatok.csv";
+    string exportPath = Path.Combine(Application.StartupPath, fileName);
+
+    using (StreamWriter writer = new StreamWriter(exportPath, false, Encoding.UTF8))
+    {
+        // Fejléc (ha kell)
+        writer.WriteLine("id;nev;kor");
+
+        foreach (var item in listBox1.Items)
+        {
+            string line = item.ToString(); // "id, nev, kor"
+            string[] parts = line.Split(','); // [id, nev, kor]
+
+            // Trim miatt: szóközök eltávolítása
+            string formattedLine = $"{parts[0].Trim()};{parts[1].Trim()};{parts[2].Trim()}";
+            writer.WriteLine(formattedLine);
+        }
+        MessageBox.Show("Exportálás kész: " + exportPath);
+        writer.Close();
+    }
+}
+```
+export to `kivalasztott hely`
+```csharp
+private void button_export_Click(object sender, EventArgs e)
+{
+    SaveFileDialog saveFileDialog = new SaveFileDialog();
+    saveFileDialog.Filter = "CSV fájlok (*.csv)|*.csv";
+    saveFileDialog.Title = "Mentés CSV fájlba";
+    saveFileDialog.FileName = "kimentett_adatok.csv";
+
+    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+    {
+        try
+        {
+            using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName, false, Encoding.UTF8))
+            {
+                // Fejléc (ha kell)
+                writer.WriteLine("id;nev;kor");
+
+                foreach (var item in listBox1.Items)
+                {
+                    string line = item.ToString(); // "id, nev, kor"
+                    string[] parts = line.Split(','); // [id, nev, kor]
+
+                    // Trim miatt: szóközök eltávolítása
+                    string formattedLine = $"{parts[0].Trim()};{parts[1].Trim()};{parts[2].Trim()}";
+                    writer.WriteLine(formattedLine);
+                }
+            }
+
+            MessageBox.Show("Sikeres exportálás!");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Hiba történt: " + ex.Message);
+        }
+    }
+}
+```
