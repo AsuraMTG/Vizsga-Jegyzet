@@ -452,6 +452,33 @@ export default function App() {
 
 
 # Desktop
+### SelectedIndex
+```csharp
+private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+ {
+     int index = listBox1.SelectedIndex;
+     if (index >= 0 && index < fuggohidak.Count)
+     {
+         Fuggohid kivalasztott = fuggohidak[index];
+
+         textBox1.Text = kivalasztott.helyszin;
+         textBox2.Text = kivalasztott.orszag;
+         textBox3.Text = kivalasztott.ev.ToString();
+         textBox4.Text = kivalasztott.hossz.ToString();
+     }
+ }
+ 
+  private void button_ChoiceInsert_Click(object sender, EventArgs e)
+        {
+            //Átlépés másik formba
+            FormGuest formGuest = new FormGuest();
+            formGuest.Show();
+            this.Close();
+
+        }
+```
+
+
 ## Hegyes feladat
 
 ```csharp
